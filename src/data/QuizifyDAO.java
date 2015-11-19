@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import entities.Account;
 import entities.Answer;
 import entities.Quiz;
+import entities.Submission;
 
 @Component
 @Transactional
@@ -26,5 +27,9 @@ public class QuizifyDAO {
 	
 	public Answer getSkippedAnswer() {
 		return em.find(Answer.class, 1);
+	}
+	
+	public void setSubmission(Submission submission) {
+		em.persist(submission);
 	}
 }

@@ -18,7 +18,7 @@ public class Answer {
 	private int id;
 	private String text;
 	private char isCorrect;
-	@ManyToOne					//(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "QUESTION_ID")
 	private Question question;
 	@OneToMany(mappedBy = "answer")

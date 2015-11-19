@@ -1,9 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.QuizifyDAO;
 import entities.Account;
-import entities.Answer;
-import entities.Question;
-import entities.Quiz;
-import entities.Response;
-import entities.Submission;
 import utility.QuizValidator;
 
 @Controller
@@ -44,6 +35,7 @@ public class QuizifyController {
 	public ModelAndView getResult(HttpServletRequest req) {
 		QuizValidator qv = new QuizValidator(req, quizifyDAO);
 		ModelAndView mav = new ModelAndView("ResultPage.jsp");
+		quizifyDAO.setSubmission(qv.getSubmission());
 		mav.addObject("score", qv.getScore());
 		mav.addObject("submission", qv.getSubmission());
 		return mav;

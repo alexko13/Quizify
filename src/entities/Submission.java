@@ -3,6 +3,7 @@ package entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Submission {
 	@ManyToOne
 	@JoinColumn(name = "QUIZ_ID")
 	private Quiz quiz;
-	@OneToMany(mappedBy = "submission")
+	@OneToMany(mappedBy = "submission", cascade = CascadeType.PERSIST)
 	private List<Response> responses;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "SUBMISSION_TIME")

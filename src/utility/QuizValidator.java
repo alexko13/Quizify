@@ -49,6 +49,8 @@ public class QuizValidator {
 			Response response = new Response();
 			response.setSubmission(submission);
 			response.setQuestion(question);
+			
+			
 			if (userAnswers.containsKey(questionID)) {
 				for (Answer answer : question.getAnswers()) {
 					if (answer.getId() == Integer.parseInt(userAnswers.get(questionID)[0])) {
