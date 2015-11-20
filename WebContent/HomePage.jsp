@@ -11,15 +11,18 @@
 		<a href="HomePage.jsp">Quizify</a>
 	</h1>
 
-	<form action="DisplayQuizzes.do" method="GET">
-		<input type="submit" value="Take a quiz!" />
-	</form>
-
-
 	<form action="SignOut.do" method="POST">
 		<input type="submit" value="Sign Out (beta)" />
 	</form>
 
+	<form action="DisplayQuizzes.do" method="GET">
+		<input type="submit" value="Take a quiz!" />
+	</form>
+
+	<form action="CreateNewQuiz.do" method="GET">
+		<input type="submit" value="Make a quiz!" />
+	</form>
+	
 	<p>Logged in as ${account.username }</p>
 
 </body>

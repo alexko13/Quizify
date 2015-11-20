@@ -22,9 +22,13 @@ public class QuizifyDAO {
 	public List<Quiz> getAllQuizzes() {
 		return em.createQuery("SELECT q FROM Quiz q", Quiz.class).getResultList();
 	}
-	
+
 	public Quiz getQuiz(int id) {
 		return em.find(Quiz.class, id);
+	}
+
+	public void setQuiz(Quiz quiz) {
+		em.persist(quiz);
 	}
 
 	public Account getAccount(int id) {

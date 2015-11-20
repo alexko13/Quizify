@@ -16,7 +16,7 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String text;
-	@OneToMany(mappedBy = "question")
+	@OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
 	private List<Answer> answers;
 	@ManyToMany(mappedBy = "questions")
 	private List<Quiz> quizzes;
