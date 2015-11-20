@@ -1,5 +1,7 @@
 package data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,6 +19,10 @@ public class QuizifyDAO {
 	@PersistenceContext
 	private EntityManager em;
 
+	public List<Quiz> getAllQuizzes() {
+		return em.createQuery("SELECT q FROM Quiz q", Quiz.class).getResultList();
+	}
+	
 	public Quiz getQuiz(int id) {
 		return em.find(Quiz.class, id);
 	}

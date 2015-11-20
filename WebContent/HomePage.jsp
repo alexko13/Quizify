@@ -10,11 +10,12 @@
 	<h1>
 		<a href="HomePage.jsp">Quizify</a>
 	</h1>
-	<p>Logged in as ${account.username }</p>
 	
 	<form action="DisplayQuizzes.do" method="GET">
 		<input type="submit" value="Take a quiz!" />
 	</form>
+	
+	<p>Logged in as ${account.username }</p>
 	
 </body>
 </html>

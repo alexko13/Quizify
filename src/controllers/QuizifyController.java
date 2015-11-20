@@ -38,16 +38,12 @@ public class QuizifyController {
 
 	@RequestMapping("DisplayQuizzes.do")
 	public ModelAndView displayQuizzes() {
-		ModelAndView mv = new ModelAndView();
-		//TODO: get quizzes from db and add to mv to display
-		
-		mv.setViewName("DisplayQuizzes.jsp");
-		return mv;
+		return new ModelAndView("DisplayQuizzes.jsp", "allQuizzes", quizifyDAO.getAllQuizzes());
 	}
 
 	@RequestMapping(value = "GetQuiz.do", method = RequestMethod.GET)
-	public String getQuiz(HttpServletRequest req) {
-		req.getSession().setAttribute("quiz", quizifyDAO.getQuiz(1));
+	public String getQuiz(HttpServletRequest req, @RequestParam("quizID") int quizID) {
+		req.getSession().setAttribute("quiz", quizifyDAO.getQuiz(quizID));
 		return "QuestionPage.jsp";
 	}
 

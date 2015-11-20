@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,11 +14,13 @@
 	<h1>
 		<a href="HomePage.jsp">Quizify</a>
 	</h1>
-	<p>--HARD CODED LINK--</p>
-	<form action="GetQuiz.do" method="GET">
-		<input type="submit" value="STATE CAP QUIZ" />
-	</form>
-	<p>------------------</p>
-
+	
+	<h3>Select a Quiz below!</h3>
+	
+	<c:forEach var="quizOption" items="${allQuizzes }">
+		<p><a href="GetQuiz.do?quizID=${quizOption.id }">${quizOption.name }</a></p>
+	</c:forEach>
+	
+	
 </body>
 </html>

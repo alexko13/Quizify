@@ -145,6 +145,126 @@ INSERT INTO quiz_question (quiz_id, question_id)
             VALUES (1, 3);
 INSERT INTO quiz_question (quiz_id, question_id)
             VALUES (1, 4);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO question (text)
+            VALUES ('What does IPA stand for?');
+INSERT INTO question (text)
+            VALUES ('Which is not an ingredient in beer?');
+INSERT INTO question (text)
+            VALUES ('How many types of beer are there?');
+INSERT INTO question (text)
+            VALUES ('In what year were the first beer cans produced?');
+
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (5, 'Imperial Pale Ale', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (5, 'Imported Premium Ale', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (5, 'Indian Pale Ale', 'Y');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (5, 'Irish Porter Ale', 'N');
+            
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (6, 'Salt', 'Y');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (6, 'Hops', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (6, 'Yeast', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (6, 'Water', 'N');
+
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (7, 'About 300', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (7, 'About 400', 'Y');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (7, 'About 500', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (7, 'About 600', 'N');
+
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (8, '1950', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (8, '1900', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (8, '1965', 'N');
+INSERT INTO answer (question_id, text, isCorrect)
+            VALUES (8, '1935', 'Y');
+
+INSERT INTO quiz (name)
+            VALUES ('Beer Trivia');
+
+
+INSERT INTO quiz_question (quiz_id, question_id)
+            VALUES (2, 5);
+INSERT INTO quiz_question (quiz_id, question_id)
+            VALUES (2, 6);
+INSERT INTO quiz_question (quiz_id, question_id)
+            VALUES (2, 7);
+INSERT INTO quiz_question (quiz_id, question_id)
+            VALUES (2, 8);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
 INSERT INTO quiz_submission (user_id, quiz_id, submission_time)
             VALUES (1, 1, '2015-03-01 11:03:20');
