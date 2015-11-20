@@ -35,6 +35,13 @@ public class QuizifyController {
 			return "index.jsp";
 		}
 	}
+	
+	//TODO:Fix sign out to disable accessing pages via back button?
+	@RequestMapping(value="SignOut.do", method = RequestMethod.POST)
+	public String signOut(HttpServletRequest req) {
+		req.getSession().removeAttribute("account");
+		return "index.jsp";
+	}
 
 	@RequestMapping("DisplayQuizzes.do")
 	public ModelAndView displayQuizzes() {

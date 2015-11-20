@@ -12,7 +12,6 @@
 		<a href="index.jsp">Quizify</a>
 	</h1>
 
-
 	<h3>Sign In:</h3>
 	<form action="SignIn.do" method="POST">
 		<input type="text" placeholder="username" name="username" />
