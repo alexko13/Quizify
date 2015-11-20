@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import entities.Account;
 import entities.Answer;
+import entities.Question;
 import entities.Quiz;
 import entities.Submission;
 

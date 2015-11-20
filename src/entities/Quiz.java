@@ -27,7 +27,7 @@ public class Quiz {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -47,11 +47,11 @@ public class Quiz {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
-	
+
 	public List<Submission> getSubmissions() {
 		return submissions;
 	}
-	
+
 	public void setSubmissions(List<Submission> submissions) {
 		this.submissions = submissions;
 	}
