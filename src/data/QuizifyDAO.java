@@ -20,15 +20,24 @@ public class QuizifyDAO {
 	public Quiz getQuiz(int id) {
 		return em.find(Quiz.class, id);
 	}
-	
+
 	public Account getAccount(int id) {
+
 		return em.find(Account.class, id);
 	}
-	
+
+	public Account getAccount(String username) throws Exception {
+		try {
+			return (Account) em.createQuery("SELECT a FROM Account a WHERE a.username = :u").setParameter("u", username).getSingleResult();
+		} catch (Exception e) {
+			throw new Exception("Invalid Account");
+		}
+	}
+
 	public Answer getSkippedAnswer() {
 		return em.find(Answer.class, 1);
 	}
-	
+
 	public void setSubmission(Submission submission) {
 		em.persist(submission);
 	}

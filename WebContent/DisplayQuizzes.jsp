@@ -4,18 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ACCOUNT TEST</title>
+<title>Insert title here</title>
 </head>
 <body>
 
-	<h1>
-		<a href="index.html">Qu¿z¿fy</a>
-	</h1>
 
-	<p>${account }</p>
-	<p>${account.submissions[0] }</p>
-	<p>${account.submissions[0].submissionTime }</p>
-	<p>${account.submissions[0].responses[0] }</p>
+	<h1>
+		<a href="HomePage.jsp">Quizify</a>
+	</h1>
+	<p>--HARD CODED LINK--</p>
+	<form action="GetQuiz.do" method="GET">
+		<input type="submit" value="STATE CAP QUIZ" />
+	</form>
+	<p>------------------</p>
 
 </body>
 </html>
