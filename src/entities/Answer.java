@@ -19,7 +19,7 @@ public class Answer {
 	private String text;
 	private char isCorrect;
 	@ManyToOne
-	@JoinColumn(name = "QUESTION_ID")
+	@JoinColumn(name = "QUESTION_ID", nullable=true)
 	private Question question;
 	@OneToMany(mappedBy = "answer")
 	private List<Response> responses;

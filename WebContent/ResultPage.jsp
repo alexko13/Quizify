@@ -11,9 +11,9 @@
 <body>
 
 	<h1>
-		<a href="index.html">Qu¿z¿fy</a>
+		<a href="HomePage.jsp">Quizify</a>
 	</h1>
-
+	
 	<h2>${quiz.name }</h2>
 
 		<p>You answered: ${score.correct } / ${score.total } (${score.percentCorrect }%) correctly!</p>

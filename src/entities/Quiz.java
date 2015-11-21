@@ -18,7 +18,7 @@ public class Quiz {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "QUIZ_QUESTION", joinColumns = @JoinColumn(name = "QUIZ_ID") , inverseJoinColumns = @JoinColumn(name = "QUESTION_ID") )
 	private List<Question> questions;
 	@OneToMany(mappedBy = "quiz")
@@ -27,7 +27,7 @@ public class Quiz {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -47,11 +47,11 @@ public class Quiz {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
-	
+
 	public List<Submission> getSubmissions() {
 		return submissions;
 	}
-	
+
 	public void setSubmissions(List<Submission> submissions) {
 		this.submissions = submissions;
 	}
