@@ -33,7 +33,6 @@ public class QuizifyDAO {
 	}
 
 	public Account getAccount(int id) {
-
 		return em.find(Account.class, id);
 	}
 
@@ -43,6 +42,10 @@ public class QuizifyDAO {
 		} catch (Exception e) {
 			throw new Exception("Invalid Account");
 		}
+	}
+	
+	public void setAccount(Account account) {
+		em.persist(account);
 	}
 
 	public Answer getSkippedAnswer() {

@@ -19,6 +19,7 @@ import entities.Answer;
 import entities.Question;
 import entities.Quiz;
 import entities.Submission;
+import models.SignUp;
 import utility.QuizValidator;
 
 @Controller
@@ -27,8 +28,7 @@ public class QuizifyController {
 	private QuizifyDAO quizifyDAO;
 
 	@RequestMapping(value = "SignIn.do", method = RequestMethod.POST)
-	public String signIn(HttpServletRequest req, @RequestParam("username") String username,
-			@RequestParam("password") String password) {
+	public String signIn(HttpServletRequest req, @RequestParam("username") String username, @RequestParam("password") String password) {
 		try {
 			Account account = quizifyDAO.getAccount(username);
 			if (password.equals(account.getPassword())) {
@@ -42,6 +42,20 @@ public class QuizifyController {
 			req.setAttribute("signInError", e.getMessage());
 			return "index.jsp";
 		}
+	}
+
+	// TODO: Make validate account creation
+	@RequestMapping(value = "SignUp.do")
+	public String signUp(HttpServletRequest req, SignUp signUp) {
+		Account account = new Account();
+		account.setEmail(signUp.getEmail());
+		account.setUsername(signUp.getUsername());
+		account.setPassword(signUp.getPassword());
+		account.setSubmissions(new ArrayList<Submission>());
+		account.setRegistrationDate(new Date());
+		quizifyDAO.setAccount(account);
+		req.getSession().setAttribute("account", account);
+		return "HomePage.jsp";
 	}
 
 	// TODO:Fix sign out to disable accessing pages via back button?
@@ -95,6 +109,7 @@ public class QuizifyController {
 		QuizValidator qv = new QuizValidator(req, quizifyDAO);
 		ModelAndView mav = new ModelAndView("ResultPage.jsp");
 		Submission submission = qv.getSubmission();
+
 		submission.setSubmissionTime(new Date());
 		quizifyDAO.setSubmission(submission);
 		mav.addObject("score", qv.getScore());
