@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import entities.Account;
 import entities.Answer;
-import entities.Question;
 import entities.Quiz;
 import entities.Submission;
 
@@ -33,16 +32,15 @@ public class QuizifyDAO {
 	}
 
 	public Account getAccount(int id) {
-
 		return em.find(Account.class, id);
 	}
 
-	public Account getAccount(String username) throws Exception {
-		try {
+	public Account getAccount(String username) {
 			return (Account) em.createQuery("SELECT a FROM Account a WHERE a.username = :u").setParameter("u", username).getSingleResult();
-		} catch (Exception e) {
-			throw new Exception("Invalid Account");
-		}
+	}
+	
+	public void setAccount(Account account) {
+		em.persist(account);
 	}
 
 	public Answer getSkippedAnswer() {

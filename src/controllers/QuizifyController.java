@@ -27,8 +27,7 @@ public class QuizifyController {
 	private QuizifyDAO quizifyDAO;
 
 	@RequestMapping(value = "SignIn.do", method = RequestMethod.POST)
-	public String signIn(HttpServletRequest req, @RequestParam("username") String username,
-			@RequestParam("password") String password) {
+	public String signIn(HttpServletRequest req, @RequestParam("username") String username, @RequestParam("password") String password) {
 		try {
 			Account account = quizifyDAO.getAccount(username);
 			if (password.equals(account.getPassword())) {
@@ -39,7 +38,22 @@ public class QuizifyController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			req.setAttribute("signInError", e.getMessage());
+			req.setAttribute("signInError", "Invalid Account / Password");
+			return "index.jsp";
+		}
+	}
+
+	// TODO: Make validate account creation
+	@RequestMapping(value = "SignUp.do")
+	public String signUp(HttpServletRequest req, Account account) {
+		account.setSubmissions(new ArrayList<Submission>());
+		account.setRegistrationDate(new Date());
+		try {
+			quizifyDAO.setAccount(account);
+			req.getSession().setAttribute("account", account);
+			return "HomePage.jsp";
+		} catch (Exception e) {
+			req.setAttribute("signUpError", "Invalid Sign Up");
 			return "index.jsp";
 		}
 	}
@@ -95,6 +109,7 @@ public class QuizifyController {
 		QuizValidator qv = new QuizValidator(req, quizifyDAO);
 		ModelAndView mav = new ModelAndView("ResultPage.jsp");
 		Submission submission = qv.getSubmission();
+
 		submission.setSubmissionTime(new Date());
 		quizifyDAO.setSubmission(submission);
 		mav.addObject("score", qv.getScore());

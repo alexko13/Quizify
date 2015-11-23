@@ -11,17 +11,9 @@
 	<context:component-scan base-package="controllers, data" />
 	<context:annotation-config />
 
-	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
-		<property name="url" value="jdbc:derby://localhost:1527/quiz" />
-		<property name="username" value="app" />
-		<property name="password" value="app" />
-	</bean>
-
 	<bean id="myEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="QuizifyPersistenceUnit" />
-		<property name="dataSource" ref="myDataSource" />
 		<property name="jpaPropertyMap">
 			<props>
 				<prop key="eclipselink.weaving">false</prop>
