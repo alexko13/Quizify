@@ -19,7 +19,6 @@ import entities.Answer;
 import entities.Question;
 import entities.Quiz;
 import entities.Submission;
-import models.SignUp;
 import utility.QuizValidator;
 
 @Controller
@@ -46,16 +45,17 @@ public class QuizifyController {
 
 	// TODO: Make validate account creation
 	@RequestMapping(value = "SignUp.do")
-	public String signUp(HttpServletRequest req, SignUp signUp) {
-		Account account = new Account();
-		account.setEmail(signUp.getEmail());
-		account.setUsername(signUp.getUsername());
-		account.setPassword(signUp.getPassword());
+	public String signUp(HttpServletRequest req, Account account) {
 		account.setSubmissions(new ArrayList<Submission>());
 		account.setRegistrationDate(new Date());
-		quizifyDAO.setAccount(account);
-		req.getSession().setAttribute("account", account);
-		return "HomePage.jsp";
+		try {
+			quizifyDAO.setAccount(account);
+			req.getSession().setAttribute("account", account);
+			return "HomePage.jsp";
+		} catch (Exception e) {
+			req.setAttribute("signUpError", "Invalid Sign Up");
+			return "index.jsp";
+		}
 	}
 
 	// TODO:Fix sign out to disable accessing pages via back button?
