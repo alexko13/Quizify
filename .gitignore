@@ -16,3 +16,6 @@ persistence.xml
 
 #SQL scripts
 *.sql
+
+#POM properties
+pom.properties
