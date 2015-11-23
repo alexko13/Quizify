@@ -12,7 +12,7 @@
 hs_err_pid*
 
 #Persistence Unit Configs
-persistence.xml
+/WebContent/WEB-INF/classes/META-INF/persistence.xml
 
 #SQL scripts
 *.sql
