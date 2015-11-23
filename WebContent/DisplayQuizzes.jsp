@@ -14,13 +14,13 @@
 	<h1>
 		<a href="HomePage.jsp">Quizify</a>
 	</h1>
-	
+
 	<h3>Select a Quiz below!</h3>
-	
+
 	<c:forEach var="quizOption" items="${allQuizzes }">
 		<p><a href="GetQuiz.do?quizID=${quizOption.id }">${quizOption.name }</a></p>
 	</c:forEach>
-	
-	
+
+
 </body>
 </html>

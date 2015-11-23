@@ -38,7 +38,7 @@ public class QuizifyController {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			req.setAttribute("signInError", e.getMessage());
+			req.setAttribute("signInError", "Invalid Account / Password");
 			return "index.jsp";
 		}
 	}
