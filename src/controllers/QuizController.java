@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.QuizifyDAO;
-import entities.Account;
 import entities.Answer;
 import entities.Question;
 import entities.Quiz;
@@ -22,48 +21,9 @@ import entities.Submission;
 import utility.QuizValidator;
 
 @Controller
-public class QuizifyController {
+public class QuizController {
 	@Autowired
 	private QuizifyDAO quizifyDAO;
-
-	@RequestMapping(value = "SignIn.do", method = RequestMethod.POST)
-	public String signIn(HttpServletRequest req, @RequestParam("username") String username, @RequestParam("password") String password) {
-		try {
-			Account account = quizifyDAO.getAccount(username);
-			if (password.equals(account.getPassword())) {
-				req.getSession().setAttribute("account", account);
-				return "HomePage.jsp";
-			} else {
-				throw new Exception("Invalid Password");
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			req.setAttribute("signInError", "Invalid Account / Password");
-			return "index.jsp";
-		}
-	}
-
-	// TODO: Make validate account creation
-	@RequestMapping(value = "SignUp.do")
-	public String signUp(HttpServletRequest req, Account account) {
-		account.setSubmissions(new ArrayList<Submission>());
-		account.setRegistrationDate(new Date());
-		try {
-			quizifyDAO.setAccount(account);
-			req.getSession().setAttribute("account", account);
-			return "HomePage.jsp";
-		} catch (Exception e) {
-			req.setAttribute("signUpError", "Invalid Sign Up");
-			return "index.jsp";
-		}
-	}
-
-	// TODO:Fix sign out to disable accessing pages via back button?
-	@RequestMapping(value = "SignOut.do", method = RequestMethod.POST)
-	public String signOut(HttpServletRequest req) {
-		req.getSession().removeAttribute("account");
-		return "index.jsp";
-	}
 
 	@RequestMapping("DisplayQuizzes.do")
 	public ModelAndView displayQuizzes() {
