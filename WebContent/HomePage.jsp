@@ -10,20 +10,24 @@
 		<h1>
 			<a class="quizifyIcon" href="HomePage.jsp">Quizify</a>
 		</h1>
+		<p>Logged in as ${account.username }</p>
 	
 		<form action="SignOut.do" method="POST">
-			<input type="submit" value="Sign Out (beta)" />
+			<input type="submit" value="Sign Out" />
 		</form>
 	
 		<form action="DisplayQuizzes.do" method="GET">
-			<input type="submit" value="Take a quiz!" />
+			<input type="submit" value="Take a Quiz" />
 		</form>
 	
 		<form action="CreateNewQuiz.do" method="GET">
-			<input type="submit" value="Make a quiz!" />
+			<input type="submit" value="Make a Quiz" />
 		</form>
 		
-		<p>Logged in as ${account.username }</p>
+		<form action="DisplayCreatedQuizzes.do" method="GET">
+			<input type="submit" value="My Quizzes" />
+		</form>
+		
 	</div>
 </body>
 </html>

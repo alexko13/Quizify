@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,12 +19,17 @@ public class Quiz {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinTable(name = "QUIZ_QUESTION", joinColumns = @JoinColumn(name = "QUIZ_ID") , inverseJoinColumns = @JoinColumn(name = "QUESTION_ID") )
 	private List<Question> questions;
-	@OneToMany(mappedBy = "quiz")
+	
+	@OneToMany(mappedBy = "quiz", cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Submission> submissions;
 
+	@ManyToOne
+	@JoinColumn(name = "CREATOR")
+	private Account account;
+	
 	public int getId() {
 		return id;
 	}
@@ -56,6 +62,14 @@ public class Quiz {
 		this.submissions = submissions;
 	}
 
+	public Account getAccount() {
+		return account;
+	}
+	
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
 	@Override
 	public String toString() {
 		return "Quiz id: " + id + "\nName: " + name;

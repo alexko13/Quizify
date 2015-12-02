@@ -33,6 +33,12 @@ public class QuizifyController {
 	public ModelAndView displayQuizzes() {
 		return new ModelAndView("DisplayQuizzes.jsp", "allQuizzes", quizifyDAO.getAllQuizzes());
 	}
+	
+	@RequestMapping("DisplayCreatedQuizzes.do")
+	public ModelAndView displayCreatedQuizzes(HttpServletRequest req) {
+		Account account = (Account) req.getSession().getAttribute("account");
+		return new ModelAndView("CreatedQuizzes.jsp", "accountQuizzes", quizifyDAO.getAccountQuizzes(account));
+	}
 
 	@RequestMapping("CreateNewQuiz.do")
 	public ModelAndView createNewQuiz() {
@@ -52,9 +58,17 @@ public class QuizifyController {
 		newQuiz.setQuestions(newQuestionsList);
 		return new ModelAndView("CreateNewQuiz.jsp", "newQuiz", newQuiz);
 	}
+	
+	@RequestMapping("DeleteQuiz.do")
+	public ModelAndView deleteQuiz(HttpServletRequest req, @RequestParam("quizID") int quizID) {
+		System.out.println("deleting " + quizID);
+		quizifyDAO.deleteQuiz(quizID);
+		return displayCreatedQuizzes(req);
+	}
 
 	@RequestMapping("SaveNewQuiz.do")
-	public String saveNewQuiz(Quiz newQuiz) {
+	public String saveNewQuiz(HttpServletRequest req, Quiz newQuiz) {
+		newQuiz.setAccount((Account) req.getSession().getAttribute("account"));
 		for (Question question : newQuiz.getQuestions())
 			for (Answer answer : question.getAnswers())
 				answer.setQuestion(question);

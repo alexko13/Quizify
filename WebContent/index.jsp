@@ -16,7 +16,7 @@
         <h4>Sign In:</h4>
         <form action="SignIn.do" method="POST">
             <input type="text" placeholder="username" name="username" /> <br />
-            <input type="text" placeholder="password" name="password" /> <br />
+            <input type="password" placeholder="password" name="password" /> <br />
             <input type="submit" value="Sign In" />
         </form>
 

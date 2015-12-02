@@ -20,7 +20,7 @@
 			<form:errors path="email" /> <br/>
 			<form:input type="text" placeholder="username (5-30)" path="username" />
 			<form:errors path="username" /> <br />
-			<form:input type="text" placeholder="password (5-30)" path="password" />
+			<form:input type="password" placeholder="password (5-30)" path="password" />
 			<form:errors path="password" /> <br />
 			<input type="submit" value="Sign Up" />
 		</form:form>
