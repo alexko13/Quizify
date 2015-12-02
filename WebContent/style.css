@@ -1,0 +1,35 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, legend, label, input, textarea, p {
+    padding: 0;
+    margin:0;
+}
+
+a {
+    text-decoration: none;
+}
+
+input, select {
+    background-color: #C2DDE3;
+    border-radius: 2px;
+    color: #02647B;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+}
+
+input[type="submit"] {
+    border: 1px;
+    border-radius: 5px;
+    border-bottom-color: #07404D;
+}
+
+.quizifyIcon {
+    color: #07404D;
+}
+
+.pageContainer {
+    background-color: #2D96AF;
+    margin: 0;
+    padding: 20;
+    color: #C2DDE3;
+    font-family: Helvetica;
+}

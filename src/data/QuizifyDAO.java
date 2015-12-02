@@ -22,9 +22,21 @@ public class QuizifyDAO {
 	public List<Quiz> getAllQuizzes() {
 		return em.createQuery("SELECT q FROM Quiz q", Quiz.class).getResultList();
 	}
+	
+	public List<Quiz> getAccountQuizzes(Account account) {
+		return em.createQuery("SELECT q FROM Quiz q WHERE q.account = :a").setParameter("a", account).getResultList();
+	}
+	
 
 	public Quiz getQuiz(int id) {
 		return em.find(Quiz.class, id);
+	}
+	
+	public void deleteQuiz(int id) {
+		System.out.println("in deleteQuiz");
+		Quiz quiz = em.find(Quiz.class, id);
+		System.out.println("I have " + quiz);
+		em.remove(quiz);
 	}
 
 	public void setQuiz(Quiz quiz) {

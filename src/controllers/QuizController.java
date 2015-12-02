@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,59 +23,26 @@ import entities.Submission;
 import utility.QuizValidator;
 
 @Controller
-public class QuizifyController {
+public class QuizController {
 	@Autowired
 	private QuizifyDAO quizifyDAO;
-
-	@RequestMapping(value = "SignIn.do", method = RequestMethod.POST)
-	public String signIn(HttpServletRequest req, @RequestParam("username") String username, @RequestParam("password") String password) {
-		try {
-			Account account = quizifyDAO.getAccount(username);
-			if (password.equals(account.getPassword())) {
-				req.getSession().setAttribute("account", account);
-				return "HomePage.jsp";
-			} else {
-				throw new Exception("Invalid Password");
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			req.setAttribute("signInError", "Invalid Account / Password");
-			return "index.jsp";
-		}
-	}
-
-	// TODO: Make validate account creation
-	@RequestMapping(value = "SignUp.do")
-	public String signUp(HttpServletRequest req, Account account) {
-		account.setSubmissions(new ArrayList<Submission>());
-		account.setRegistrationDate(new Date());
-		try {
-			quizifyDAO.setAccount(account);
-			req.getSession().setAttribute("account", account);
-			return "HomePage.jsp";
-		} catch (Exception e) {
-			req.setAttribute("signUpError", "Invalid Sign Up");
-			return "index.jsp";
-		}
-	}
-
-	// TODO:Fix sign out to disable accessing pages via back button?
-	@RequestMapping(value = "SignOut.do", method = RequestMethod.POST)
-	public String signOut(HttpServletRequest req) {
-		req.getSession().removeAttribute("account");
-		return "index.jsp";
-	}
 
 	@RequestMapping("DisplayQuizzes.do")
 	public ModelAndView displayQuizzes() {
 		return new ModelAndView("DisplayQuizzes.jsp", "allQuizzes", quizifyDAO.getAllQuizzes());
 	}
-
+	
+	@RequestMapping("DisplayCreatedQuizzes.do")
+	public ModelAndView displayCreatedQuizzes(HttpServletRequest req) {
+		Account account = (Account) req.getSession().getAttribute("account");
+		return new ModelAndView("CreatedQuizzes.jsp", "accountQuizzes", quizifyDAO.getAccountQuizzes(account));
+	}
+	
 	@RequestMapping("CreateNewQuiz.do")
-	public ModelAndView createNewQuiz() {
+	public ModelAndView createNewQuiz(@RequestParam("numberOfQuestions") int numberOfQuestions) {
 		Quiz newQuiz = new Quiz();
 		List<Question> newQuestionsList = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < numberOfQuestions; i++) {
 			Question newQuestion = new Question();
 			List<Answer> newAnswersList = new ArrayList<>();
 			for (int j = 0; j < 4; j++) {
@@ -88,9 +56,16 @@ public class QuizifyController {
 		newQuiz.setQuestions(newQuestionsList);
 		return new ModelAndView("CreateNewQuiz.jsp", "newQuiz", newQuiz);
 	}
+	
+	@RequestMapping("DeleteQuiz.do")
+	public ModelAndView deleteQuiz(HttpServletRequest req, @RequestParam("quizID") int quizID) {
+		quizifyDAO.deleteQuiz(quizID);
+		return displayCreatedQuizzes(req);
+	}
 
 	@RequestMapping("SaveNewQuiz.do")
-	public String saveNewQuiz(Quiz newQuiz) {
+	public String saveNewQuiz(HttpServletRequest req, Quiz newQuiz) {
+		newQuiz.setAccount((Account) req.getSession().getAttribute("account"));
 		for (Question question : newQuiz.getQuestions())
 			for (Answer answer : question.getAnswers())
 				answer.setQuestion(question);
@@ -115,5 +90,16 @@ public class QuizifyController {
 		mav.addObject("score", qv.getScore());
 		mav.addObject("submission", submission);
 		return mav;
+	}
+	
+	//TODO: refactor exception handling
+	@ExceptionHandler(Exception.class)
+	public ModelAndView defaultExceptionHandler(Exception e, HttpServletRequest req) {
+		String redirectPage;
+		if(req.getSession().getAttribute("account") == null)
+			redirectPage = "index.jsp";
+		else
+			redirectPage = "HomePage.jsp";
+		return new ModelAndView("Error.jsp", "redirectPage", redirectPage);
 	}
 }

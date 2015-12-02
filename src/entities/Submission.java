@@ -28,7 +28,7 @@ public class Submission {
 	@ManyToOne
 	@JoinColumn(name = "QUIZ_ID")
 	private Quiz quiz;
-	@OneToMany(mappedBy = "submission", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "submission", cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private List<Response> responses;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "SUBMISSION_TIME")
