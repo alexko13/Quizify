@@ -39,12 +39,12 @@ public class QuizifyController {
 		Account account = (Account) req.getSession().getAttribute("account");
 		return new ModelAndView("CreatedQuizzes.jsp", "accountQuizzes", quizifyDAO.getAccountQuizzes(account));
 	}
-
+	
 	@RequestMapping("CreateNewQuiz.do")
-	public ModelAndView createNewQuiz() {
+	public ModelAndView createNewQuiz(@RequestParam("numberOfQuestions") int numberOfQuestions) {
 		Quiz newQuiz = new Quiz();
 		List<Question> newQuestionsList = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < numberOfQuestions; i++) {
 			Question newQuestion = new Question();
 			List<Answer> newAnswersList = new ArrayList<>();
 			for (int j = 0; j < 4; j++) {
@@ -61,7 +61,6 @@ public class QuizifyController {
 	
 	@RequestMapping("DeleteQuiz.do")
 	public ModelAndView deleteQuiz(HttpServletRequest req, @RequestParam("quizID") int quizID) {
-		System.out.println("deleting " + quizID);
 		quizifyDAO.deleteQuiz(quizID);
 		return displayCreatedQuizzes(req);
 	}

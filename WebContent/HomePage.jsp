@@ -20,7 +20,7 @@
 			<input type="submit" value="Take a Quiz" />
 		</form>
 	
-		<form action="CreateNewQuiz.do" method="GET">
+		<form action="CreateNewQuiz.do?numberOfQuestions=4" method="POST">
 			<input type="submit" value="Make a Quiz" />
 		</form>
 		
