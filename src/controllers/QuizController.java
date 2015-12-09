@@ -87,7 +87,7 @@ public class QuizController {
 
 		submission.setSubmissionTime(new Date());
 		quizifyDAO.setSubmission(submission);
-		mav.addObject("score", qv.getScore());
+//		mav.addObject("score", qv.getScore());
 		mav.addObject("submission", submission);
 		return mav;
 	}

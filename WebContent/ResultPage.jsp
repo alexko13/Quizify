@@ -13,9 +13,9 @@
 			<a class="quizifyIcon" href="HomePage.jsp">Quizify</a>
 		</h1>
 		
-		<h2>${quiz.name }</h2>
+		<h2>${submission.quiz.name }</h2>
 	
-			<p>You answered: ${score.correct } / ${score.total } (${score.percentCorrect }%) correctly!</p>
+		<p>You answered: ${submission.numberCorrect } / ${submission.numberOfQuestions } (${submission.percentCorrect }%) correctly!</p>
 			
 		<c:forEach var="response" items="${submission.responses}">
 			<h3>

@@ -16,7 +16,7 @@
 		<h3>Select a Quiz below!</h3>
 	
 		<c:forEach var="quizOption" items="${allQuizzes }">
-			<p><a href="GetQuiz.do?quizID=${quizOption.id }">${quizOption.name }</a></p>
+			<p><a href="GetQuiz.do?quizID=${quizOption.id }">${quizOption.name } (Average Score: ${quizOption.averageScore })</a></p>
 		</c:forEach>
 	
 	</div>
