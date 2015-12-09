@@ -70,6 +70,19 @@ public class Quiz {
 		this.account = account;
 	}
 	
+	public double getAverageScore() {
+		if(submissions.size() == 0)
+			return 0;
+		
+		double totalSubmissions = 0;
+		double totalPercentage = 0;
+		for (Submission submission : submissions) {
+			totalPercentage += submission.getPercentCorrect();
+			totalSubmissions++;
+		}
+		return (totalPercentage/totalSubmissions);
+	}
+	
 	@Override
 	public String toString() {
 		return "Quiz id: " + id + "\nName: " + name;

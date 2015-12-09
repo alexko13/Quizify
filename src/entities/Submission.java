@@ -28,7 +28,7 @@ public class Submission {
 	@ManyToOne
 	@JoinColumn(name = "QUIZ_ID")
 	private Quiz quiz;
-	@OneToMany(mappedBy = "submission", cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToMany(mappedBy = "submission", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private List<Response> responses;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "SUBMISSION_TIME")
@@ -74,6 +74,26 @@ public class Submission {
 		this.submissionTime = submissionTime;
 	}
 
+	public int getNumberOfQuestions() {
+		return responses.size();
+	}
+
+	public double getPercentCorrect() {
+		double totalCorrect = 0;
+		for (Response response : responses)
+			if(response.getAnswer().getIsCorrect() == 'Y')
+				totalCorrect++;
+		return (100 * totalCorrect / responses.size());
+	}
+	
+	public int getNumberCorrect() {
+		int totalCorrect = 0;
+		for (Response response : responses)
+			if(response.getAnswer().getIsCorrect() == 'Y')
+				totalCorrect++;
+		return totalCorrect;
+	}
+	
 	@Override
 	public String toString() {
 		return "Submission ID: " + id + "\nAccount: " + account.getUsername() + "\nQuiz: " + quiz.getName()
